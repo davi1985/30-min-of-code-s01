@@ -3,7 +3,7 @@ import { Card } from './Card';
 import { useMatch } from '../../router';
 import { Header } from '../../componentes/Header';
 
-export function Users() {
+export default function Users() {
   const {
     data: { users },
   } = useMatch();

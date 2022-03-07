@@ -1,9 +1,10 @@
 import { Link, Outlet, ReactLocation, Router, useMatch } from 'react-location';
-import { Header } from './componentes/Header';
-import { Products } from './containers/Products/Products';
-import { Users } from './containers/Users/Users';
+import { Header, Spinner } from './componentes';
 import { http } from './services/api';
 
+import { ReactLocationSimpleCache } from 'react-location-simple-cache';
+
+const cache = new ReactLocationSimpleCache();
 const location = new ReactLocation();
 
 const routes = [
@@ -13,16 +14,20 @@ const routes = [
   },
   {
     path: '/users',
-    element: <Users />,
-    loader: async () => ({
+    element: () =>
+      import('./containers/Users/Users').then((module) => <module.default />),
+    loader: cache.createLoader(async () => ({
       users: await http.get('/users').then((data) => data.data.users),
-    }),
-    pendingElement: async () => <div>Loading...</div>,
+    })),
+    pendingElement: async () => <Spinner />,
     pendingMs: 300,
   },
   {
     path: '/products',
-    element: <Products />,
+    element: () =>
+      import('./containers/Products/Products').then((module) => (
+        <module.default />
+      )),
   },
 ];
 

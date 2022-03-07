@@ -1,18 +1,27 @@
-import { useEffect, useState } from 'react';
 import { http } from '../../services/api';
 
-export function Products() {
-  const [products, setProducts] = useState([]);
+import { Header, Spinner } from '../../componentes';
+import { Card } from './Card';
+import { useQuery } from 'react-query';
 
-  useEffect(() => {
-    const getProducts = async () => {
-      const { data } = await http.get('/products');
+export default function Products() {
+  const { isLoading, isError, data } = useQuery('products', () =>
+    http.get('/products').then(({ data }) => data.products),
+  );
 
-      setProducts(data.products);
-    };
+  if (isLoading) return <Spinner />;
 
-    getProducts();
-  }, []);
+  if (isError) return <p>Error :(</p>;
 
-  return products.map((product) => <p key={product.id}>{product.name}</p>);
+  return (
+    <>
+      <Header title="Products" />
+
+      <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+        {data.map((product) => (
+          <Card product={product} key={product.id} />
+        ))}
+      </div>
+    </>
+  );
 }

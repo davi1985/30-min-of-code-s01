@@ -1,6 +1,7 @@
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline';
 import { Fragment } from 'react';
+import { ReactLocationDevtools } from 'react-location-devtools';
 
 import { location, routes, Link, Router, Outlet } from './router';
 
@@ -201,6 +202,8 @@ export function App() {
           </div>
         </main>
       </div>
+
+      <ReactLocationDevtools initialIsOpen={false} />
     </Router>
   );
 }
