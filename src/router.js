@@ -14,20 +14,23 @@ const routes = [
   },
   {
     path: '/users',
+
     element: () =>
       import('./containers/Users/Users').then((module) => <module.default />),
+
     loader: cache.createLoader(async () => ({
       users: await http.get('/users').then((data) => data.data.users),
     })),
-    pendingElement: async () => <Spinner />,
+
+    pendingElement: async () => (
+      <Spinner variant="green" message="Loading users!" />
+    ),
     pendingMs: 300,
   },
   {
     path: '/products',
     element: () =>
-      import('./containers/Products/Products').then((module) => (
-        <module.default />
-      )),
+      import('./containers/Products').then((module) => <module.default />),
   },
 ];
 

@@ -1,6 +1,6 @@
 import { makeServer } from '../../miragejs/server';
 
-describe('Containers/Products', () => {
+describe('features/Products', () => {
   let server;
 
   beforeEach(() => {
@@ -13,8 +13,6 @@ describe('Containers/Products', () => {
 
   it('should render', () => {
     const products = server.createList('product', 10);
-
-    console.log(JSON.stringify(products, null, 2));
 
     expect(true).toBe(true);
   });
