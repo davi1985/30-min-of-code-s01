@@ -1,8 +1,6 @@
 import { MailIcon, PhoneIcon } from '@heroicons/react/solid';
 
 export function Card({ user }) {
-  console.log('user', user.name);
-
   return (
     <li
       data-testid="user"

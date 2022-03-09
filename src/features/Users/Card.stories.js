@@ -5,7 +5,7 @@ export default {
   title: 'Features/Users/Card',
   component: Card,
 };
-console.log('user', getUser());
+
 const Template = (args) => (
   <div className="max-w-xl mx-auto">
     <Card {...args} />
