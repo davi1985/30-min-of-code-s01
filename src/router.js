@@ -16,7 +16,7 @@ const routes = [
     path: '/users',
 
     element: () =>
-      import('./containers/Users/Users').then((module) => <module.default />),
+      import('./containers/Users').then((module) => <module.default />),
 
     loader: cache.createLoader(async () => ({
       users: await http.get('/users').then((data) => data.data.users),
