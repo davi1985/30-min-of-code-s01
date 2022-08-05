@@ -1,11 +1,11 @@
 import { useQuery } from 'react-query';
-import { Products } from '../features/Products/Products';
 import { Spinner } from '../componentes';
+import { Products } from '../features/Products/Products';
 import { http } from '../services/api';
 
 export default function ProductsContainer() {
   const { isLoading, isError, data } = useQuery('products', () =>
-    http.get('/products').then(({ data }) => data.products),
+    http.get('/products').then((data) => data.products),
   );
 
   if (isLoading) return <Spinner message="Loading products" variant="orange" />;
